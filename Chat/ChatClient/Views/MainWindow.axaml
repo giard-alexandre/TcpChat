@@ -15,22 +15,34 @@
 		<vm:MainWindowViewModel />
 	</Design.DataContext>
 
-	<Grid>
-		<Button Content="Connect" HorizontalAlignment="Left" Height="26" Margin="30,20,0,0" VerticalAlignment="Top"
-		        Width="96" Command="{Binding Connect}" />
-		<TextBlock Height="188" Margin="0,246,0,0" TextWrapping="Wrap" Text="{Binding LogText}" VerticalAlignment="Top" Name="Log" />
-		<TextBox Name="ChatMessageTextBox" HorizontalAlignment="Left" Margin="30,64,0,0" TextWrapping="Wrap"
-		         Text="Hello, server!" VerticalAlignment="Top" Width="120" />
-		<Button Content="Send" HorizontalAlignment="Left" Margin="155,64,0,0" VerticalAlignment="Top"
-		        Command="{Binding Send}" CommandParameter="{Binding #ChatMessageTextBox.Text}" />
-		<Button Content="Disconnect" HorizontalAlignment="Left" Height="26" Margin="131,20,0,0" VerticalAlignment="Top"
-		        Width="96" Command="{Binding Disconnect}" />
-		<TextBox Text="Bob" HorizontalAlignment="Center" Margin="0,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top"
-		         Width="120" Name="NicknameTextBox" />
-		<Label Content="Nickname:" HorizontalAlignment="Left" Margin="274,60,0,0" VerticalAlignment="Top"
-		       RenderTransformOrigin="1.066,-0.249" />
-		<Button Content="Set" HorizontalAlignment="Left" Margin="465,64,0,0" VerticalAlignment="Top" Command="{Binding Set}" CommandParameter="{Binding #NicknameTextBox.Text}" />
-		<TextBlock Height="231" Margin="532,10,10,0" TextWrapping="Wrap" Text="{Binding ChatText}" VerticalAlignment="Top" x:Name="Chat" />
-	</Grid>
+	<DockPanel LastChildFill="True">
+		<ScrollViewer DockPanel.Dock="Right" MinWidth="200">
+			<TextBlock TextWrapping="Wrap" Text="{Binding ChatText}" VerticalAlignment="Top" x:Name="Chat" />
+		</ScrollViewer>
+
+
+		<Grid RowDefinitions="Auto, Auto, Auto, *" ColumnDefinitions="Auto, Auto, Auto, Auto">
+			<StackPanel Grid.Row="0" Grid.ColumnSpan="4" Orientation="Horizontal">
+				<Button Content="Connect" HorizontalAlignment="Left" Command="{Binding Connect}" />
+				<Button Content="Disconnect" HorizontalAlignment="Left" Command="{Binding Disconnect}" />
+			</StackPanel>
+
+
+			<Label Grid.Row="1" Grid.Column="0" Content="Message:" />
+			<Label Grid.Row="1" Grid.Column="2" Content="Nickname:" />
+
+
+			<TextBox Grid.Row="2" Grid.Column="0" Name="ChatMessageTextBox" TextWrapping="Wrap"
+			         Text="Hello, server!" />
+			<Button Grid.Row="2" Grid.Column="1" Content="Send" Command="{Binding Send}" CommandParameter="{Binding #ChatMessageTextBox.Text}" />
+			<TextBox Grid.Row="2" Grid.Column="2" Text="Bob" TextWrapping="Wrap" Name="NicknameTextBox" />
+			<Button Grid.Row="2" Grid.Column="3" Content="Set" Command="{Binding Set}" CommandParameter="{Binding #NicknameTextBox.Text}" />
+
+			<ScrollViewer Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4">
+				<TextBlock TextWrapping="Wrap" Text="{Binding LogText}" VerticalAlignment="Top" Name="Log" />
+			</ScrollViewer>
+		</Grid>
+	</DockPanel>
+
 
 </Window>
