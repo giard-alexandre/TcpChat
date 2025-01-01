@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ChatClient.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ChatClient.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="ChatClient">
+
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainWindowViewModel />
+	</Design.DataContext>
+
+	<Grid>
+		<Button Content="Connect" HorizontalAlignment="Left" Height="26" Margin="30,20,0,0" VerticalAlignment="Top"
+		        Width="96" Command="{Binding Connect}" />
+		<TextBlock Height="188" Margin="0,246,0,0" TextWrapping="Wrap" Text="{Binding LogText}" VerticalAlignment="Top" Name="Log" />
+		<TextBox Name="ChatMessageTextBox" HorizontalAlignment="Left" Margin="30,64,0,0" TextWrapping="Wrap"
+		         Text="Hello, server!" VerticalAlignment="Top" Width="120" />
+		<Button Content="Send" HorizontalAlignment="Left" Margin="155,64,0,0" VerticalAlignment="Top"
+		        Command="{Binding Send}" CommandParameter="{Binding #ChatMessageTextBox.Text}" />
+		<Button Content="Disconnect" HorizontalAlignment="Left" Height="26" Margin="131,20,0,0" VerticalAlignment="Top"
+		        Width="96" Command="{Binding Disconnect}" />
+		<TextBox Text="Bob" HorizontalAlignment="Center" Margin="0,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top"
+		         Width="120" Name="NicknameTextBox" />
+		<Label Content="Nickname:" HorizontalAlignment="Left" Margin="274,60,0,0" VerticalAlignment="Top"
+		       RenderTransformOrigin="1.066,-0.249" />
+		<Button Content="Set" HorizontalAlignment="Left" Margin="465,64,0,0" VerticalAlignment="Top" Command="{Binding Set}" CommandParameter="{Binding #NicknameTextBox.Text}" />
+		<TextBlock Height="231" Margin="532,10,10,0" TextWrapping="Wrap" Text="{Binding ChatText}" VerticalAlignment="Top" x:Name="Chat" />
+	</Grid>
+
+</Window>
